@@ -1,0 +1,20 @@
+{
+  "fitbit": {
+    "appUUID": "28464951-88c7-438e-bca3-5c0647a232b8",
+    "appType": "app",
+    "appDisplayName": "Costa Card",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "#607d8b",
+    "requestedPermissions": [
+      "access_internet"
+    ],
+    "buildTargets": [
+      "higgs"
+    ],
+    "i18n": {
+      "en": {
+        "name": "Costa Card"
+      }
+    }
+  }
+}
