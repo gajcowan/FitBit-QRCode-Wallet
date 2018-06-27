@@ -20,12 +20,6 @@ const image =  document.getElementById("image");
 const cardDetail = document.getElementById("cardDetail") ;
 const cardNo = cardDetail.getElementById('copy');
 
-const debugCardNo = document.getElementById("debug-cardno");
-const debugFile = document.getElementById("debug-file");
-const debugFileExists =document.getElementById("debug-fileexists");
-const debugError = document.getElementById("debug-error");
-
-
 let mySettings ;
 
 loadSettings() ;
@@ -36,8 +30,6 @@ me.onunload = saveSettings ;
 
 // Set the selected index
 container.value = 0; // jump to first slide
-
-
 
 // Load settings from filesystem
 function loadSettings() {
@@ -59,51 +51,26 @@ function saveSettings() {
 
 function applySettings() {
   console.log("In applySettings()");
-  console.log(`mySettings.image  = ${mySettings.image}`);
-  console.log(`mySettings.cardno = ${mySettings.cardno}`);
-  console.log(`mySettings.debug  = ${mySettings.debug}`);
-    if( mySettings.image && mySettings.image !== ""){
-      console.log("Image Loaded");
-      image.href = mySettings.image ;
-      cardNo.text = mySettings.cardno.substring(0,6) + ' ' + mySettings.cardno.substring(6,11) + ' ' +mySettings.cardno.substring(11)
-      hide(noimageView);
-      show(imageView) ;
-      show(cardView);
-      display.autoOff = false;
-    }
-    else{
-      console.log("No Image Loaded");
-      hide(imageView);
-      hide(cardView);
-      show(noimageView);
-      display.autoOff = true;
-    }
-    updateDebugDisplay();
+  if( mySettings.image && mySettings.image !== ""){
+    console.log("Image Loaded");
+    image.href = mySettings.image ;
+    cardNo.text = mySettings.cardno.substring(0,6) + ' ' + mySettings.cardno.substring(6,11) + ' ' +mySettings.cardno.substring(11)
+    hide(noimageView);
+    show(imageView) ;
+    show(cardView);
+    display.autoOff = false;
+  }
+  else{
+    console.log("No Image Loaded");
+    hide(imageView);
+    hide(cardView);
+    show(noimageView);
+    display.autoOff = true;
+  }
   container.value = 0; // jump to first slide
   saveSettings();
 }
 
-function updateDebugDisplay(){
-  console.log("In updateDebugDisplay()");
-  if(mySettings.debug === true){
-    console.log("Debug Enabled");
-    debugCardNo.text = `Card No: ${mySettings.cardno}`;
-    debugFile.text = `File: ${(mySettings.image || "undefined").split('\\').pop().split('/').pop()}`;
-    debugFileExists.text = `FileExists: ${fileExists(mySettings.image)}`;
-    if((mySettings.error || "") === ""){
-      debugError.text = "";
-      debugError.state = "disabled";
-    }
-    else{
-      debugError.text = `Error : ${mySettings.error}`.substring(0,50);
-      debugError.state = "enabled";
-    }
-    show(debugView);
-  }
-  else{
-    hide(debugView);
-  }
-}
 
 // Event occurs when new file(s) are received
 inbox.onnewfile = function () {

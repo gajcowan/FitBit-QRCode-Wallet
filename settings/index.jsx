@@ -10,13 +10,6 @@ function Card(props) {
           label="Card No."
         />
       </Section>
-      <Section
-        title={<Text bold align="center">Support</Text>}>
-        <Toggle
-          settingsKey="debug"
-          label="Debug"
-        />
-      </Section>
     </Page>
   );
 }
